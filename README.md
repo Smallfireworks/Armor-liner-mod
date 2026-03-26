@@ -1,16 +1,16 @@
 # Armor Liner
 
-`Armor Liner` is a standalone NeoForge 1.21.1 mod extracted from `Days-go-by-1.21.1-Neoforge`.
-It keeps only the armor lining feature so players can use this mechanic without the rest of that project.
+Armor Liner is a small standalone NeoForge mod for Minecraft `1.21.1`.
+It extracts the armor lining feature from `Days go by` into its own project so players can use this mechanic without the rest of that mod.
 
-## What it adds
+## Features
 
-- `Liner Snips`
-- Applying warming liners to armor with Tough As Nails wool armor pieces
-- Applying cooling liners to armor with Tough As Nails leaf armor pieces
-- Removing liners and returning the corresponding liner item
-- Tooltip text showing the current liner on an armor piece
-- Tough As Nails temperature modifier integration based on equipped liners
+- Adds `Liner Snips`
+- Lets you apply warming liners with Tough As Nails wool armor pieces
+- Lets you apply cooling liners with Tough As Nails leaf armor pieces
+- Lets you remove liners and recover the liner item
+- Shows the current liner type in armor tooltips
+- Applies temperature changes with Tough As Nails-style armor scaling instead of a flat per-piece bonus
 
 ## Requirements
 
@@ -18,35 +18,30 @@ It keeps only the armor lining feature so players can use this mechanic without 
 - NeoForge `21.1.x`
 - Java `21`
 - Tough As Nails for NeoForge `1.21.1`
+- GlitchCore for NeoForge `1.21.1`
 
-This standalone mod is intended to run together with Tough As Nails. The mod metadata marks Tough As Nails as a required dependency.
+## Recipes
 
-## Runtime dependency download
+- `Liner Snips`: `Shears` + `Iron Ingot` in a shapeless recipe
+- Apply a liner: combine one unlined armor piece with the matching Tough As Nails wool or leaf armor piece
+- Remove a liner: combine lined armor with `Liner Snips`
 
-For development runs started through Gradle, this project is configured with `localRuntime` dependencies:
+## Development
+
+Local Gradle runs use runtime dependencies so `runClient` and `runServer` will download the required jars automatically.
 
 - `GlitchCore-neoforge:1.21.1-2.1.0.0`
 - `ToughAsNails-neoforge:1.21.1-10.1.0.13`
 
-That means `runClient` / `runServer` will download the required jars automatically into the Gradle cache.
+Public releases on Modrinth or CurseForge should list `Tough As Nails` and `GlitchCore` as dependencies as well.
 
-If you plan to publish the built jar to CurseForge or Modrinth, launcher-side auto-download of dependencies is controlled by the platform's project metadata, not only by Gradle or `neoforge.mods.toml`.
-
-## Recipes
-
-- Craft `Liner Snips` with two iron ingots in a diagonal pattern
-- Combine an unlined armor piece with a matching Tough As Nails liner armor item to apply a liner
-- Combine lined armor with `Liner Snips` to remove the liner and recover it
-
-## Development
-
-Build:
+## Build
 
 ```powershell
 .\gradlew.bat build
 ```
 
-Run client:
+## Run Client
 
 ```powershell
 .\gradlew.bat runClient
@@ -54,5 +49,5 @@ Run client:
 
 ## Notes
 
-- The implementation intentionally stays close to the original `Days go by` subset, but is renamed and trimmed for standalone use.
-- Tough As Nails integration is loaded through reflection to keep compile-time coupling low while still enabling runtime behavior.
+- This repository is the standalone release target for the armor lining feature.
+- The implementation started as a direct extraction from `Days go by`, then was trimmed for standalone use.

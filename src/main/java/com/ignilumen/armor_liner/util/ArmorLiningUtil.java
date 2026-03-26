@@ -65,6 +65,14 @@ public final class ArmorLiningUtil {
         return total;
     }
 
+    public static int getHeatingLiningCount(Player player) {
+        return countLinings(player, LiningType.WARMING);
+    }
+
+    public static int getCoolingLiningCount(Player player) {
+        return countLinings(player, LiningType.COOLING);
+    }
+
     public static ApplyMatch findApplyMatch(CraftingInput input) {
         if (input.ingredientCount() != 2) {
             return null;
@@ -219,6 +227,17 @@ public final class ArmorLiningUtil {
         };
         String prefix = liningType == LiningType.WARMING ? "wool_" : "leaf_";
         return ResourceLocation.fromNamespaceAndPath("toughasnails", prefix + slotName);
+    }
+
+    private static int countLinings(Player player, LiningType type) {
+        int total = 0;
+        for (ItemStack armorStack : player.getArmorSlots()) {
+            ArmorLining lining = getLining(armorStack);
+            if (lining != null && lining.type() == type) {
+                total++;
+            }
+        }
+        return total;
     }
 
     public record ApplyMatch(ItemStack armorStack, LiningType linerType) {}
